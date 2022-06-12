@@ -10,9 +10,6 @@ inputs:
     required: true
     default: 'requirements.txt'
 outputs:
-  requirements-contents:
-    description: Contents of requirements.txt file
-    value: ${{ steps.requirements-contents-parser.outputs.contents }}
   custom-file-name:
     description: Name of the output file
     value: ${{ inputs.outfile-name }}
@@ -33,11 +30,6 @@ runs:
     - if: inputs.without-hashes == 'false'
       run: |-
           poetry export -f requirements.txt --output ${{ inputs.outfile-name }}
-      shell: bash
-
-    - id: requirements-contents-parser
-      run: |-
-          echo "::set-output name=contents::$(cat ${{ inputs.outfile-name }})"
       shell: bash
 
 branding:
