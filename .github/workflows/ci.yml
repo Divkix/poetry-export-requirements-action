@@ -9,7 +9,9 @@ jobs:
   test:
     runs-on: ubuntu-latest
     steps:
+    
     - uses: actions/checkout@v3
+
     - name: Sample pyproject.toml file
       run: |-
           cat > pyproject.toml << EOF
@@ -28,8 +30,54 @@ jobs:
           build-backend = "poetry.core.masonry.api"
 
           EOF
-    - name: self test action
+  
+    - id: test-default
+      name: Test default
       uses: ./
-    - name: Show requirements.txt
+
+    - name: Check custom-file-name
       run: |-
-          cat requirements.txt
+        T_FILE_NAME=${{ steps.test-default.outputs.custom-file-name }}
+        if [ -e $T_FILE_NAME ]
+        then
+            echo "file exists"
+        else
+            echo "file does not exists"
+            exit 1
+        fi
+
+    - id: test-outfile-name
+      name: Test outfile-name
+      uses: ./
+      with:
+        without-hashes: false
+        outfile-name: requirements-custom-name.txt
+
+    - name: Check outfile-name
+      run: |-
+        T_FILE_NAME=${{ steps.test-outfile-name.outputs.custom-file-name }}
+        if [ -e $T_FILE_NAME ]
+        then
+            echo "file exists"
+        else
+            echo "file does not exists"
+            exit 1
+        fi
+
+    - id: test-without-hashes
+      name: Test without-hashes
+      uses: ./
+      with:
+        without-hashes: true
+        outfile-name: requirements-without-hashes.txt
+
+    - name: Check without-hashes
+      run: |-
+        T_FILE_NAME=${{ steps.test-without-hashes.outputs.custom-file-name }}
+        if [ -e $T_FILE_NAME ]
+        then
+            echo "file exists"
+        else
+            echo "file does not exists"
+            exit 1
+        fi
