@@ -9,7 +9,7 @@ This action prints exports the pyproject.toml and poetry.lock file to the requir
 `outfile-name`: Custom name for exported file. Default: `requirements.txt`
 
 ## Outputs
-`requirements-contents`: Contents of the `outfile-name` input
+`custom-file-name`: Name of the output file
 
 The current working directory will have a `requirements.txt` file generated from the pyproject.toml and poetry.lock files.
 
