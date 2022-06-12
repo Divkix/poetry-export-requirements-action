@@ -37,10 +37,12 @@ jobs:
 
     - name: Check custom-file-name
       run: |-
-        if [ -e ${{ steps.test-default.outputs.custom-file-name }} ]
+        T_FILE_NAME=${{ steps.test-default.outputs.custom-file-name }}
+        T_FILE_CONTENTS=${{ steps.test-default.outputs.contents }}
+        if [ -e $T_FILE_NAME ]
         then
             echo "file exists"
-            echo ${{ steps.test-default.outputs.contents }} | wc -l
+            echo $T_FILE_CONTENTS | wc -l
         else
             echo "file does not exists"
             exit 1
@@ -55,10 +57,12 @@ jobs:
 
     - name: Check outfile-name
       run: |-
-        if [ -e ${{ steps.test-outfile-name.outputs.custom-file-name }} ]
+        T_FILE_NAME=${{ steps.test-outfile-name.outputs.custom-file-name }}
+        T_FILE_CONTENTS=${{ steps.test-outfile-name.outputs.contents }}
+        if [ -e $T_FILE_NAME ]
         then
             echo "file exists"
-            echo ${{ steps.test-outfile-name.outputs.contents }} | wc -l
+            echo $T_FILE_CONTENTS | wc -l
         else
             echo "file does not exists"
             exit 1
@@ -68,15 +72,17 @@ jobs:
       name: Test without-hashes
       uses: ./
       with:
-        without-hashes: false
+        without-hashes: true
         outfile-name: requirements-without-hashes.txt
 
     - name: Check without-hashes
       run: |-
-        if [ -e ${{ steps.test-without-hashes.outputs.custom-file-name }} ]
+        T_FILE_NAME=${{ steps.test-without-hashes.outputs.custom-file-name }}
+        T_FILE_CONTENTS=${{ steps.test-without-hashes.outputs.contents }}
+        if [ -e $T_FILE_NAME ]
         then
             echo "file exists"
-            echo ${{ steps.test-without-hashes.outputs.contents }} | wc -l
+            echo $T_FILE_CONTENTS | wc -l
         else
             echo "file does not exists"
             exit 1
