@@ -3,11 +3,11 @@ description: "Export requirements.txt file from poetry"
 inputs:
   without-hashes:
     description: Export requirements.txt file without-hashes
-    required: true
+    required: false
     default: 'true'
   outfile-name:
     description: Name of the output file
-    required: true
+    required: false
     default: 'requirements.txt'
 outputs:
   custom-file-name:
