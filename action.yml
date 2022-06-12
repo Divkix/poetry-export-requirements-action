@@ -9,17 +9,27 @@ inputs:
     description: Name of the output file
     required: true
     default: 'requirements.txt'
+outputs:
+  requirements-contents:
+    description: Contents of requirements.txt file
+    value: ${{ steps.requirements-contents-parser.outputs.contents }}
+  custom-file-name:
+    description: Name of the output file
+    value: ${{ inputs.outfile-name }}
 runs:
   using: composite
   steps:
     - uses: actions/setup-python@v3
     - run: python -m pip install poetry
       shell: bash
-    - if: ${{inputs.without-hashes}} == 'true'
-      run: poetry export -f requirements.txt --without-hashes --output ${{inputs.outfile-name}}
+    - if: ${{ inputs.without-hashes }} == 'true'
+      run: poetry export -f requirements.txt --without-hashes --output ${{ inputs.outfile-name }}
       shell: bash
-    - if: ${{inputs.without-hashes}} == 'false'
-      run: poetry export -f requirements.txt --output ${{inputs.outfile-name}}
+    - if: ${{ inputs.without-hashes }} == 'false'
+      run: poetry export -f requirements.txt --output ${{ inputs.outfile-name }}
+      shell: bash
+    - id: requirements-contents-parser
+      run: ::set-output name=contents::$(cat ${{ inputs.outfile-name }})
       shell: bash
 branding:
   icon: code
