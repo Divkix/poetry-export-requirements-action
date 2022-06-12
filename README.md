@@ -28,7 +28,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
-    - uses: DivideProjects/poetry-export-requiremets-txt@v1
+    - uses: DivideProjects/poetry-export-requirements-action@v1
       with:
         without-hashes: true
         outfile-name: requirements.txt
