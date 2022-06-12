@@ -13,7 +13,7 @@ The current working directory will have a `requirements.txt` file generated from
 ## Example usage
 
 ```yaml
-name: pre-commit
+name: poetry export requirements.txt
 
 on:
   pull_request:
@@ -25,8 +25,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
-    - uses: actions/setup-python@v3
     - uses: DivideProjects/poetry-export-requiremets-txt@v1
 ```
 
-Make sure to use `actions/setup-python@3` as the first action in your pipeline.
+Make sure to use `actions/checkout@3` as the first action in your pipeline.
