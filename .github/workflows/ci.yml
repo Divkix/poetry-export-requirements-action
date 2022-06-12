@@ -37,9 +37,10 @@ jobs:
 
     - name: Check custom-file-name
       run: |-
-        if [ -e ${{ steps.test-outfile-name.outputs.custom-file-name }} ]
+        if [ -e ${{ steps.test-default.outputs.custom-file-name }} ]
         then
             echo "file exists"
+            echo ${{ steps.test-default.outputs.contents }} | wc -l
         else
             echo "file does not exists"
             exit 1
@@ -57,6 +58,7 @@ jobs:
         if [ -e ${{ steps.test-outfile-name.outputs.custom-file-name }} ]
         then
             echo "file exists"
+            echo ${{ steps.test-outfile-name.outputs.contents }} | wc -l
         else
             echo "file does not exists"
             exit 1
@@ -74,6 +76,7 @@ jobs:
         if [ -e ${{ steps.test-without-hashes.outputs.custom-file-name }} ]
         then
             echo "file exists"
+            echo ${{ steps.test-without-hashes.outputs.contents }} | wc -l
         else
             echo "file does not exists"
             exit 1
