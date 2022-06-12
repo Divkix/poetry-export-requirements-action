@@ -1,0 +1,36 @@
+name: "CI"
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+jobs:
+  main:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - uses: actions/setup-python@v3
+    - name: Sample pyproject.toml file
+      run: |-
+          cat > pyproject.toml << EOF
+          [tool.poetry]
+          name = "sampleenvfile"
+          version = "1.0.0"
+          description = ""
+          authors = []
+
+          [tool.poetry.dependencies]
+          python = "^3.9"
+          urllib3 = "^1.26"
+
+          [build-system]
+          requires = ["poetry-core>=1.0.0"]
+          build-backend = "poetry.core.masonry.api"
+
+          EOF
+    - name: self test action
+      uses: ./
+    - name: Show requirements.txt
+      run: |-
+          cat requirements.txt
