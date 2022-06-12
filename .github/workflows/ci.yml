@@ -28,8 +28,17 @@ jobs:
           build-backend = "poetry.core.masonry.api"
 
           EOF
-    - name: self test action
+    - name: Test default
       uses: ./
-    - name: Show requirements.txt
+    - name: Test without-hashes
+      uses: ./
+      with:
+        without-hashes: false
+    - name: Test outfile-name
+      uses: ./
+      with:
+        outfile-name: requirements-new.txt
+    - name: Show requirements.txt file
       run: |-
           cat requirements.txt
+          cat requirements-new.txt

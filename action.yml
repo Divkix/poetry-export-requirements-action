@@ -1,12 +1,25 @@
 name: "Poetry export requirements.txt file"
 description: "Export requirements.txt file from poetry"
+inputs:
+  without-hashes:
+    description: Export requirements.txt file without-hashes
+    required: true
+    default: 'true'
+  outfile-name:
+    description: Name of the output file
+    required: true
+    default: 'requirements.txt'
 runs:
   using: composite
   steps:
     - uses: actions/setup-python@v3
     - run: python -m pip install poetry
       shell: bash
-    - run: poetry export -f requirements.txt --without-hashes --output requirements.txt
+    - if: ${{inputs.without-hashes}} == 'true'
+      run: poetry export -f requirements.txt --without-hashes --output ${{inputs.outfile-name}}
+      shell: bash
+    - if: ${{inputs.without-hashes}} == 'false'
+      run: poetry export -f requirements.txt --output ${{inputs.outfile-name}}
       shell: bash
 branding:
   icon: code
