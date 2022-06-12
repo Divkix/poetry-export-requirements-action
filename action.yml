@@ -29,7 +29,7 @@ runs:
       run: poetry export -f requirements.txt --output ${{ inputs.outfile-name }}
       shell: bash
     - id: requirements-contents-parser
-      run: ::set-output name=contents::$(cat ${{ inputs.outfile-name }})
+      run: echo "::set-output name=contents::$(cat ${{ inputs.outfile-name }})"
       shell: bash
 branding:
   icon: code
