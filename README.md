@@ -4,9 +4,10 @@ This action prints exports the pyproject.toml and poetry.lock file to the requir
 
 ## Inputs
 
-`without-hashes`: If set to `true`, the hashes will be removed from the requirements.txt file.
-
-`outfile-name`: Custom name for exported file. Default: `requirements.txt`
+| Name           | Required | Description                                                          | Default          |
+| -------------- | -------- | -------------------------------------------------------------------- | ---------------- |
+| without-hashes | false    | If you want to use '--without-hashes' option when exporting the file | true             |
+| outfile-name   | false    | Custom name for exported file                                        | requirements.txt |
 
 ## Outputs
 `custom-file-name`: Name of the output file
@@ -28,7 +29,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
-    - uses: DivideProjects/poetry-export-requirements-action@v1
+    - uses: divideprojects/poetry-export-requirements-action@v1
       with:
         without-hashes: true
         outfile-name: requirements.txt
