@@ -9,6 +9,10 @@ inputs:
     description: Name of the output file
     required: false
     default: 'requirements.txt'
+  args:
+    description: Additional args to pass to poetry
+    required: false
+    default: ''
 outputs:
   custom-file-name:
     description: Name of the output file
@@ -24,12 +28,12 @@ runs:
 
     - if: inputs.without-hashes == 'true'
       run: |-
-          poetry export -f requirements.txt --without-hashes --output ${{ inputs.outfile-name }}
+          poetry export -f requirements.txt ${{ inputs.args }} --without-hashes --output ${{ inputs.outfile-name }}
       shell: bash
 
     - if: inputs.without-hashes == 'false'
       run: |-
-          poetry export -f requirements.txt --output ${{ inputs.outfile-name }}
+          poetry export -f requirements.txt ${{ inputs.args }} --output ${{ inputs.outfile-name }}
       shell: bash
 
 branding:

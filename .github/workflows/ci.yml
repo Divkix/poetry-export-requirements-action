@@ -81,3 +81,20 @@ jobs:
             echo "file does not exists"
             exit 1
         fi
+
+    - id: test-args
+      name: Test args
+      uses: ./
+      with:
+        args: '--no-cache --no-ansi --quiet'
+
+    - name: Check args
+      run: |-
+        T_FILE_NAME=${{ steps.test-without-hashes.outputs.custom-file-name }}
+        if [ -e $T_FILE_NAME ]
+        then
+            echo "file exists"
+        else
+            echo "file does not exists"
+            exit 1
+        fi
