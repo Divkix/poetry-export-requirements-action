@@ -28,11 +28,11 @@ jobs:
   export-requirements-txt:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v4
     - uses: divideprojects/poetry-export-requirements-action@v1
       with:
         without-hashes: true
         outfile-name: requirements.txt
 ```
 
-Make sure to use `actions/checkout@3` as the first action in your pipeline.
+Make sure to use `actions/checkout@v4` as the first action in your pipeline.

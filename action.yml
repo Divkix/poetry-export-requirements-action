@@ -20,7 +20,7 @@ outputs:
 runs:
   using: composite
   steps:
-    - uses: actions/setup-python@v3
+    - uses: actions/setup-python@v5
 
     - run: |-
         python -m pip install poetry poetry-plugin-export
