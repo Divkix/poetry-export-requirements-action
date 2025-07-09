@@ -23,21 +23,17 @@ runs:
     - uses: actions/setup-python@v5
 
     - run: |-
-        python -m pip install poetry
-      shell: bash
-
-    - run: |-
-        python -m pip install poetry-plugin-export
+        python -m pip install poetry poetry-plugin-export
       shell: bash
 
     - if: inputs.without-hashes == 'true'
       run: |-
-        poetry export -f requirements.txt ${{ inputs.args }} --without-hashes --output ${{ inputs.outfile-name }}
+        python -m poetry export -f requirements.txt ${{ inputs.args }} --without-hashes --output ${{ inputs.outfile-name }}
       shell: bash
 
     - if: inputs.without-hashes == 'false'
       run: |-
-        poetry export -f requirements.txt ${{ inputs.args }} --output ${{ inputs.outfile-name }}
+        python -m poetry export -f requirements.txt ${{ inputs.args }} --output ${{ inputs.outfile-name }}
       shell: bash
 
 branding:
