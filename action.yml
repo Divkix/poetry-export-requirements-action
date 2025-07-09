@@ -27,7 +27,7 @@ runs:
       shell: bash
 
     - run: |-
-        poetry self add poetry-plugin-export
+        python -m pip install poetry-plugin-export
       shell: bash
 
     - if: inputs.without-hashes == 'true'
