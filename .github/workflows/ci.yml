@@ -90,7 +90,7 @@ jobs:
 
     - name: Check args
       run: |-
-        T_FILE_NAME=${{ steps.test-without-hashes.outputs.custom-file-name }}
+        T_FILE_NAME=${{ steps.test-args.outputs.custom-file-name }}
         if [ -e $T_FILE_NAME ]
         then
             echo "file exists"
